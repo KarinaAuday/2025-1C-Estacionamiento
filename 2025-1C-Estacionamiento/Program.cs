@@ -2,6 +2,7 @@ namespace _2025_1C_Estacionamiento
 {
     public class Program
     {
+        //Esto es una prueba
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
