@@ -1,0 +1,45 @@
+﻿
+
+<h1>Esta es la pagina donde hare pruebas y mostrare ejemplos de como funciona MVC</h1>
+@{
+    int numero = 2;
+    string nombre = "Juan";
+
+}
+
+<div>
+    <p>El numero es: @numero</p>
+    <p>El nombre es: @nombre</p>
+</div>
+<h2>Ejmplo con IF</h2>
+<div>
+
+    @{//Ejemplo con IF
+        int num1 = 3;
+        if (num1 > 4)
+        {
+            <p> @num1 Es mayor a 4</p>
+
+        }
+        else
+        {
+            {
+                <p> @num1 Es Menor a 4</p>
+            }
+        }
+    }
+</div>
+<div>
+    @{//Ejemplo con Listas
+       
+        <h1>Ejemplo con Listas</h1>
+        <p> Los numeros de la lista son:</p>
+       List<int> numeros = new List<int>() { 1, 2, 3, 4, 5 };
+       var numeroPares = numeros.Where(x => x % 2 == 0).ToList();
+        foreach (var num in numeroPares)
+        {
+            <p> @num</p>
+        }
+    }
+
+</div>

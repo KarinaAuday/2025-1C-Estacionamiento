@@ -18,6 +18,17 @@ namespace _2025_1C_Estacionamiento.Controllers
             return View();
         }
 
+        public IActionResult Pruebas()
+        {
+
+            return View();
+        }
+        public IActionResult Pruebas2(int num , string nombre , string apellido)
+        {
+            ViewBag.Numero = nombre;
+            ViewBag.Apellido = apellido;
+            return View(num);
+        }
         public IActionResult Privacy()
         {
             return View();
