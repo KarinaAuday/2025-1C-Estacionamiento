@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Crear Persona Con Formulario Get";
+}
+
+
+<h1>Crear Persona Con Formulario Get</h1>
+
+<form method="get" action="@Url.Action("CrearPersona", "Personas")">
+<div class="form-group">
+    <label for="Nombre" >Ingrese su Nombre</label>
+    <input type="text" id="Nombre" name="Nombre" class="form-control" />
+    <label for="Apellido">Ingrese su Apellido</label>
+    <input type="text" id="Apellido" name="Apellido" class="form-control" />
+
+</div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+
+</form>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

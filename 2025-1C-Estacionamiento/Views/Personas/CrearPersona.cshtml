@@ -1,0 +1,16 @@
+﻿@model Persona
+
+<div>
+     @if (!String.IsNullOrEmpty(Model.Apellido)) {
+        <h1>Esta es la donde muestro como recibo datos del controlador</h1>
+        <p>El nombre recibido por parametro es @Model.Nombre</p> 
+        <p>El apellido recibido por parametro es @Model.Apellido</p> 
+        <p>El dni recibido por parametro es @Model.Dni</p> 
+        <p>el email de la persona es @Model.Email</p>
+
+    }
+    else
+    {
+        <p>No se ha encontrado a la persona</p>
+    }
+</div>

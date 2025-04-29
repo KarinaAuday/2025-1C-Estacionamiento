@@ -35,7 +35,7 @@
         <h1>Ejemplo con Listas</h1>
         <p> Los numeros de la lista son:</p>
        List<int> numeros = new List<int>() { 1, 2, 3, 4, 5 };
-       var numeroPares = numeros.Where(x => x % 2 == 0).ToList();
+       var numeroPares = numeros.Where(x => x % 2 == 0).ToList(); //LINQ
         foreach (var num in numeroPares)
         {
             <p> @num</p>
@@ -43,3 +43,5 @@
     }
 
 </div>
+
+
