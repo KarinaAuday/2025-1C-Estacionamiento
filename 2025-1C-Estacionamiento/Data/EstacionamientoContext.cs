@@ -10,6 +10,7 @@ namespace _2025_1C_Estacionamiento.Data
         }
 
         public DbSet<Persona> Personas { get; set; }
+        public DbSet<_2025_1C_Estacionamiento.Models.Direccion> Direccion { get; set; }
         
     }
 }

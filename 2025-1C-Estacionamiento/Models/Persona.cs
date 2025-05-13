@@ -7,7 +7,7 @@ namespace _2025_1C_Estacionamiento.Models
         public int Id { get; set; }
 
         [Required (ErrorMessage = ErrorMsge.Required)]
-        [Display(Name = "Nombresito")]
+        [Display(Name = "Nombres")]
         [StringLength(50, ErrorMessage = ErrorMsge.StringLength)]
         [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = ErrorMsge.SoloLetras)]
         public string Nombre { get; set; }
@@ -17,6 +17,7 @@ namespace _2025_1C_Estacionamiento.Models
         public string Apellido { get; set; }
 
         [Required(ErrorMessage = ErrorMsge.Required)]
+
         public string Dni { get; set; }
 
         [Required(ErrorMessage = ErrorMsge.Required)]
