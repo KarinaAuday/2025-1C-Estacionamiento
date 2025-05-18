@@ -1,0 +1,34 @@
+﻿@model List<Persona>
+
+
+@{
+    ViewData["Title"] = "Buscador";
+}
+
+﻿<p>Busqueda de Persona por Apellido</p>
+<form method="get" action="@Url.Action("Buscar", "Personas1")">
+    <input type="text" name="cli" placeholder="Apellido del cliente" />
+    <input type="submit" value="Buscar" />
+</form>
+
+@if (Model != null && Model.Count > 0)
+{
+    <h2>Resultados de la búsqueda</h2>
+    <ul>
+        @foreach (var persona in Model)
+        {
+            <li>@persona.NombreCompleto</li>
+            <li>@persona.Dni</li>
+        }
+    </ul>
+}
+else
+{
+    <h2>No se encontraron resultados.</h2>
+}
+
+
+<a>
+    <a asp-action="Index">Volver al Buscador  de clientes</a>
+
+</a>

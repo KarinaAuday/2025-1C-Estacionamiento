@@ -10,43 +10,22 @@ using _2025_1C_Estacionamiento.Models;
 
 namespace _2025_1C_Estacionamiento.Controllers
 {
-    public class Personas1Controller : Controller
+    public class VehiculosController : Controller
     {
         private readonly EstacionamientoContext _context;
 
-        public Personas1Controller(EstacionamientoContext context)
+        public VehiculosController(EstacionamientoContext context)
         {
             _context = context;
         }
 
-
-        //Buscador 
-        public ActionResult Buscar(string ?cli)
+        // GET: Vehiculos
+        public async Task<IActionResult> Index()
         {
-            if (!String.IsNullOrEmpty(cli))
-            {
-                // Realiza la lógica de búsqueda utilizando el término "q".
-                var resultados = _context.Personas.Where(c => c.Apellido.Contains(cli)).ToList();
-
-                // Devuelve la vista de resultados con la lista de resultados.
-                return View("Buscador", resultados);
-            }
-            else
-            {
-                return View("Buscador");
-            }
-       
-
-            
-           
-        }
-        // GET: Personas1
-        public IActionResult Index()
-        {
-            return View(_context.Personas.ToList());
+            return View(await _context.Vehiculo.ToListAsync());
         }
 
-        // GET: Personas1/Details/5
+        // GET: Vehiculos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -54,39 +33,39 @@ namespace _2025_1C_Estacionamiento.Controllers
                 return NotFound();
             }
 
-            var persona = await _context.Personas
+            var vehiculo = await _context.Vehiculo
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (persona == null)
+            if (vehiculo == null)
             {
                 return NotFound();
             }
 
-            return View(persona);
+            return View(vehiculo);
         }
 
-        // GET: Personas1/Create
+        // GET: Vehiculos/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Personas1/Create
+        // POST: Vehiculos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Nombre,Apellido,Dni,Email,Profesion")] Persona persona)
+        public async Task<IActionResult> Create([Bind("Id,Patente,Marca,Color,AnioFabricacion,Modelo")] Vehiculo vehiculo)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(persona);
-                _context.SaveChanges();
+                _context.Add(vehiculo);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(persona);
+            return View(vehiculo);
         }
 
-        // GET: Personas1/Edit/5
+        // GET: Vehiculos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -94,22 +73,22 @@ namespace _2025_1C_Estacionamiento.Controllers
                 return NotFound();
             }
 
-            var persona = await _context.Personas.FindAsync(id);
-            if (persona == null)
+            var vehiculo = await _context.Vehiculo.FindAsync(id);
+            if (vehiculo == null)
             {
                 return NotFound();
             }
-            return View(persona);
+            return View(vehiculo);
         }
 
-        // POST: Personas1/Edit/5
+        // POST: Vehiculos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Apellido,Dni,Email,Profesion")] Persona persona)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Patente,Marca,Color,AnioFabricacion,Modelo")] Vehiculo vehiculo)
         {
-            if (id != persona.Id)
+            if (id != vehiculo.Id)
             {
                 return NotFound();
             }
@@ -118,12 +97,12 @@ namespace _2025_1C_Estacionamiento.Controllers
             {
                 try
                 {
-                    _context.Update(persona);
+                    _context.Update(vehiculo);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PersonaExists(persona.Id))
+                    if (!VehiculoExists(vehiculo.Id))
                     {
                         return NotFound();
                     }
@@ -134,10 +113,10 @@ namespace _2025_1C_Estacionamiento.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(persona);
+            return View(vehiculo);
         }
 
-        // GET: Personas1/Delete/5
+        // GET: Vehiculos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -145,34 +124,34 @@ namespace _2025_1C_Estacionamiento.Controllers
                 return NotFound();
             }
 
-            var persona = await _context.Personas
+            var vehiculo = await _context.Vehiculo
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (persona == null)
+            if (vehiculo == null)
             {
                 return NotFound();
             }
 
-            return View(persona);
+            return View(vehiculo);
         }
 
-        // POST: Personas1/Delete/5
+        // POST: Vehiculos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var persona = await _context.Personas.FindAsync(id);
-            if (persona != null)
+            var vehiculo = await _context.Vehiculo.FindAsync(id);
+            if (vehiculo != null)
             {
-                _context.Personas.Remove(persona);
+                _context.Vehiculo.Remove(vehiculo);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PersonaExists(int id)
+        private bool VehiculoExists(int id)
         {
-            return _context.Personas.Any(e => e.Id == id);
+            return _context.Vehiculo.Any(e => e.Id == id);
         }
     }
 }
