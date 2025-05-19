@@ -81,7 +81,9 @@ namespace _2025_1C_Estacionamiento.Controllers
             {
                 _context.Add(persona);
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                // return RedirectToAction(nameof(Index));
+                //Creo direccion para la persona
+                return RedirectToAction("Create", "Direccions", new { id = persona.Id });
             }
             return View(persona);
         }
