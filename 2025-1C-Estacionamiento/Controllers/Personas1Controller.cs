@@ -21,24 +21,25 @@ namespace _2025_1C_Estacionamiento.Controllers
 
 
         //Buscador 
-        public ActionResult Buscar(string ?cli)
+        public ActionResult Buscar (string ?apellido)
         {
-            if (!String.IsNullOrEmpty(cli))
+            if (!String.IsNullOrEmpty(apellido))
             {
-                // Realiza la lógica de búsqueda utilizando el término "q".
-                var resultados = _context.Personas.Where(c => c.Apellido.Contains(cli)).ToList();
+              
+                var personas = _context.Personas.Where(p => p.Apellido.ToUpper().Contains(apellido.ToUpper())).ToList();
+                if (personas.Count == 0)
+                {
+                    ViewBag.Mensaje = "No se encontraron resultados";
+                }
+                
+                return View("Buscador", personas);
 
-                // Devuelve la vista de resultados con la lista de resultados.
-                return View("Buscador", resultados);
             }
             else
             {
                 return View("Buscador");
             }
-       
-
             
-           
         }
         // GET: Personas1
         public IActionResult Index()
@@ -81,9 +82,7 @@ namespace _2025_1C_Estacionamiento.Controllers
             {
                 _context.Add(persona);
                 _context.SaveChanges();
-                // return RedirectToAction(nameof(Index));
-                //Creo direccion para la persona
-                return RedirectToAction("Create", "Direccions", new { id = persona.Id });
+                return RedirectToAction("Create", "Direcciones", new { id = persona.Id});
             }
             return View(persona);
         }

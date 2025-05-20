@@ -1,19 +1,19 @@
 ﻿@model List<Persona>
 
-
-@{
-    ViewData["Title"] = "Buscador";
-}
-
-﻿<p>Busqueda de Persona por Apellido</p>
-<form method="get" action="@Url.Action("Buscar", "Personas1")">
-    <input type="text" name="cli" placeholder="Apellido del cliente" />
-    <input type="submit" value="Buscar" />
+<p>Busqueda de Personas por Apellido</p>
+<form method="get" action='@Url.Action("Buscar" ,"Personas1")'>
+   <input type = "text" name="apellido" placeholder="Apellido de la Persona" />
+   <input type = "submit" value= "Buscar" />
 </form>
 
+
+@if (!String.IsNullOrEmpty(ViewBag.Mensaje))
+{
+    <p>@ViewBag.Mensaje</p>
+}
 @if (Model != null && Model.Count > 0)
 {
-    <h2>Resultados de la búsqueda</h2>
+    <h2>Resultado de la busqueda</h2>
     <ul>
         @foreach (var persona in Model)
         {
@@ -21,14 +21,10 @@
             <li>@persona.Dni</li>
         }
     </ul>
-}
-else
-{
-    <h2>No se encontraron resultados.</h2>
+
 }
 
 
 <a>
-    <a asp-action="Index">Volver al Buscador  de clientes</a>
-
+    <a asp-action="Index">Volver al incio</a>
 </a>
