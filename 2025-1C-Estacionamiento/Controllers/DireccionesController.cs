@@ -37,6 +37,11 @@ namespace _2025_1C_Estacionamiento.Controllers
             var direccion = await _context.Direccion
                 .Include(d => d.Persona)
                 .FirstOrDefaultAsync(m => m.Id == id);
+            var apellido =  direccion.Persona.Apellido;
+            var nombreCompleto = direccion.Persona.NombreCompleto;
+            var dni = direccion.Persona.Dni;
+            ViewBag.nombreCompleto = nombreCompleto;
+            ViewBag.dni = dni;
             if (direccion == null)
             {
                 return NotFound();

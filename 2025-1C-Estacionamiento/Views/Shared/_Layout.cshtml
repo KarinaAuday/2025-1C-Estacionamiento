@@ -48,10 +48,9 @@
     </div>
 
     <footer class="border-top footer text-muted">
-       <p>
-            &copy; 2023 - Estacionamiento ORT PNT1
-            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"> Voler al Inicio</a>
-        </p>
+       <div class="container">
+            <a asp-action="InicializarBD" asp-controller="PreCargaBd" class="btn btn-primary">Inicializar Base de Datos</a>
+       </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

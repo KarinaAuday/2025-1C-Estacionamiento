@@ -10,3 +10,12 @@
     <p>En esta pagina aprenderemos el MVC</p>
 </div>
 <img src="~/img/placepark.jpg" alt="Logo de Estacionamiento ORT" class="img-fluid mx-auto d-block" style="max-width: 500px;" />
+
+
+
+@if (TempData["PrecargaOK"] != null)
+{
+    <div class="alert">
+        @TempData["PrecargaOK"]
+    </div>
+}
