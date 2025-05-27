@@ -14,8 +14,13 @@ namespace _2025_1C_Estacionamiento
             builder.Services.AddControllersWithViews();
 
             //Configurar el contexto de base de datos
-            builder.Services.AddDbContext<EstacionamientoContext>(options =>
-            options.UseInMemoryDatabase("EstacionamientoDB"));
+            //builder.Services.AddDbContext<EstacionamientoContext>(options =>
+            //options.UseInMemoryDatabase("EstacionamientoDB"));
+
+              //Configuro SQL Server
+            ////Agrego la base de datos SQL , y guardo el conection string en el appsetting.json
+            builder.Services.AddDbContext<EstacionamientoContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("EstacionamientoDBCS")));
+           
 
             var app = builder.Build();
 
