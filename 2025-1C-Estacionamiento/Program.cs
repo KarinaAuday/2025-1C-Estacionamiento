@@ -1,4 +1,6 @@
 using _2025_1C_Estacionamiento.Data;
+using _2025_1C_Estacionamiento.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace _2025_1C_Estacionamiento
@@ -20,8 +22,19 @@ namespace _2025_1C_Estacionamiento
               //Configuro SQL Server
             ////Agrego la base de datos SQL , y guardo el conection string en el appsetting.json
             builder.Services.AddDbContext<EstacionamientoContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("EstacionamientoDBCS")));
-           
-
+            #region Identity
+            builder.Services.AddIdentity<Persona,Rol>().AddEntityFrameworkStores<EstacionamientoContext>();
+            #endregion
+            //Customizacion de Password
+            builder.Services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 5;
+            }
+            );
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

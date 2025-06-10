@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using _2025_1C_Estacionamiento.Helpers;
+using Microsoft.AspNetCore.Identity;
 namespace _2025_1C_Estacionamiento.Models
 {
-    public class Persona
+    public class Persona : IdentityUser<int>
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
 
         [Required (ErrorMessage = ErrorMsge.Required)]
         [Display(Name = "Nombres")]
@@ -22,8 +23,12 @@ namespace _2025_1C_Estacionamiento.Models
 
         [Required(ErrorMessage = ErrorMsge.Required)]
         [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
-
+        //public string Email { get; set; }
+        public override string Email
+        {
+            get {return base.Email; }
+            set { base.Email = value; }
+        }
         public string Profesion { get; set; }
 
         public string NombreCompleto
