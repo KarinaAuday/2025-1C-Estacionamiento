@@ -3,7 +3,10 @@
     ViewData["Title"] = "Home Page";
 }
 
-       
+ @if(String.IsNullOrEmpty(ViewBag.mensajeError))
+ {
+     <p>@ViewBag.mensajeError</p>
+ }
 
 <div class="text-center">
     <h1 class="display-4">Bienvenidos al Estacionamiento ORT PNT1</h1>

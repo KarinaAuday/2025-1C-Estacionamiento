@@ -13,13 +13,18 @@ namespace _2025_1C_Estacionamiento.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string ?mensajeError)
         {
-          //  if (!String.IsNullOrEmpty(mensajeError))
+            //  if (!String.IsNullOrEmpty(mensajeError))
             //{
-              //     ViewBag.MensajeError = mensajeError;
-           // }
-
+            //     ViewBag.MensajeError = mensajeError;
+            // }
+            //Chekeo si recibi un mensaje de error
+            if (!String.IsNullOrEmpty(mensajeError))
+            {
+                ViewBag.MensajeError = mensajeError;
+               
+            }
             return View();
         }
 

@@ -67,13 +67,10 @@ namespace _2025_1C_Estacionamiento.Controllers
 
         // GET: Clientes/Edit/5
         public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var cliente = await _context.Clientes.FindAsync(id);
+        { // Me traer los teleofonos y direccion asociados del cliente
+            var cliente = await _context.Clientes.Include(clt => clt.Telefonos)
+                                            .Include(clt => clt.Direccion)
+                                            .FirstOrDefaultAsync(c => c.Id == id);
             if (cliente == null)
             {
                 return NotFound();
@@ -86,9 +83,10 @@ namespace _2025_1C_Estacionamiento.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Cuil,Id,Nombre,Apellido,Dni,Email,Profesion")] Cliente cliente)
+        public async Task<IActionResult> Edit(int id, [Bind("Cuil,Id,Nombre,Apellido,Dni,Email,Profesion")] Cliente clienteDelFormulario)
         {
-            if (id != cliente.Id)
+            //Con ClienteFomulario Hacemos un mapeo Actualizando los campos que yo quiera
+            if (id != clienteDelFormulario.Id)
             {
                 return NotFound();
             }
@@ -97,12 +95,25 @@ namespace _2025_1C_Estacionamiento.Controllers
             {
                 try
                 {
-                    _context.Update(cliente);
+                    var clienteEnDb = _context.Clientes.Find(clienteDelFormulario.Id);
+                    if (clienteEnDb == null)
+                    {
+                        return NotFound();
+                    }
+
+                    clienteEnDb.Cuil = clienteDelFormulario.Cuil;
+                    clienteEnDb.Dni = clienteDelFormulario.Dni;
+                    clienteEnDb.Nombre = clienteDelFormulario.Nombre;
+                    clienteEnDb.Apellido = clienteDelFormulario.Apellido;
+
+                    
+
+                    _context.Update(clienteEnDb);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClienteExists(cliente.Id))
+                    if (!ClienteExists(clienteDelFormulario.Id))
                     {
                         return NotFound();
                     }
@@ -113,7 +124,7 @@ namespace _2025_1C_Estacionamiento.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+            return View(clienteDelFormulario);
         }
 
         // GET: Clientes/Delete/5
